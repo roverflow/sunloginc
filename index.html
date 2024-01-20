@@ -14,9 +14,29 @@
       rel="stylesheet"
     />
     <style>
+      html {
+        scroll-behavior: smooth;
+      }
       @media (min-width: 768px) {
         #navbar-collapse-with-animation {
           display: block !important;
+        }
+      }
+      #hero {
+        transition: opacity 1s ease-in-out;
+      }
+
+      .animated-title {
+        opacity: 0;
+        animation: fadeIn 2s forwards;
+      }
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
         }
       }
     </style>
@@ -144,9 +164,10 @@
     <!-- Hero -->
     <div class="bg-slate-900">
       <div
+        id="hero"
         class=""
         style="
-          background-image: url('assets/bgs/hero.jpg');
+          background-image: url('assets/bgs/bg2.jpg');
           background-size: cover;
           background-position: center;
         "
@@ -170,13 +191,15 @@
             <h1
               class="block font-bold text-4xl sm:text-5xl md:text-6xl lg:text-6xl bg-white/[.8] p-4 rounded"
             >
-              Now it's easier than ever to ship your goods
+              <span id="title" class="animated-title"
+                >Now it's easier than ever to ship your goods</span
+              >
             </h1>
           </div>
           <!-- End Title -->
 
           <div class="max-w-3xl text-center mx-auto bg-white/[.8] rounded p-3">
-            <p class="md:text-lg text-base">
+            <p class="md:text-lg text-base animated-title">
               Premium Custom Handling Agents & Freight Forwarders based in
               Bangalore with nationwide coverage, offering comprehensive
               logistics services for air and ocean forwarding, backed by a
@@ -313,6 +336,31 @@
           navMenu.classList.toggle("hidden");
         });
       });
+
+      var images = [
+        "assets/bgs/hero.jpg",
+        "assets/bgs/bg2.jpg",
+        "assets/bgs/bg3.jpg",
+      ];
+      var index = 0;
+
+      // Get the hero element
+      var hero = document.querySelector("#hero");
+
+      // Set initial background image
+      hero.style.backgroundImage = "url('" + images[index] + "')";
+
+      // Change background image every 5 seconds
+      setInterval(function () {
+        // First, fade out the current image
+
+        // After the transition is complete, change the image and fade it in
+        setTimeout(function () {
+          index++;
+          if (index == images.length) index = 0;
+          hero.style.backgroundImage = "url('" + images[index] + "')";
+        }, 1000); // This should match the transition duration in the CSS
+      }, 5000);
     </script>
   </body>
 </html>
